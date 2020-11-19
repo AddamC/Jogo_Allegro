@@ -9,10 +9,7 @@
 //#include "PickUps.h"
 #include "Escada.h"
 
-
 using namespace std;
-
-
 
 class LevelManager
 {
@@ -69,7 +66,7 @@ bool LevelManager::colisao(Personagem &pers,Ground plataformas)
 
 void LevelManager::init()
 {
-    //pers.pos_mundo = mundo_altura_max-150; //POSIÇAO DO PERSONAGEM NA SPRITE CONSIDERADO SIMILAR AO DA SCREEN
+    //pers.pos_mundo = mundo_altura_max-150; //POSIï¿½AO DO PERSONAGEM NA SPRITE CONSIDERADO SIMILAR AO DA SCREEN
     altura_mapa = 0;
     srand(time(NULL));
     for(int i = 0,x = rand()%650+x, y = rand()%500; i < 10; i++,x = rand()%650, y = rand()%500)

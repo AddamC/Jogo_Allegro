@@ -11,9 +11,7 @@ public:
     void pausa(BITMAP* buffer, BITMAP* pausa);
 };
 
-Menu::Menu(){
-
-}
+Menu::Menu(){}
 
 void Menu::init(){
     ativado = true;
