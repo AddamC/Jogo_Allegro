@@ -12,7 +12,7 @@ public:
     int contVidas = 2;
     Inimigo();
     void init();
-    void desenhar(BITMAP*buffer,BITMAP*vilao);
+    void draw(BITMAP*buffer, BITMAP*vilao);
     void update(Personagem &pers, int timer);
     void movimento(Personagem &pers);
 };
@@ -95,7 +95,7 @@ void Inimigo::update(Personagem &pers, int timer){
     */
 }
 
-void Inimigo::desenhar(BITMAP*buffer, BITMAP*vilao){
+void Inimigo::draw(BITMAP*buffer, BITMAP*vilao){
 
     textprintf_ex(buffer, font, x1, y1-30, makecol(255, 0, 255),
                     -1, "Vida inimigo: %i", contVidas);

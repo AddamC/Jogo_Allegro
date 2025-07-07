@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
-#include "global.h"
+#include "Global.h"
 //#include "PickUps.h"
 #include "Escada.h"
 
@@ -19,8 +19,8 @@ public:
 
     void init();
     void update(Personagem &pers, BITMAP* &vida); ///RETORNANDO POR REFERENCIA PARA ALTERAR VALORES DOS ATRIBUTOS DO PERSONAGEM EM TEMPO REAL
-    void desenhar(BITMAP*buffer, BITMAP* mundo, Personagem &pers, BITMAP* ground, BITMAP* vida);
-    bool colisao(Personagem &pers, Ground plataformas);
+    void draw(BITMAP*buffer, BITMAP* mundo, Personagem &pers, BITMAP* ground, BITMAP* vida);
+    bool collided(Personagem &pers, Ground plataformas);
     Ground g1 {0,100,500,600};
     Ground g2 {150,220,300,350};
     Ground g3 {300,370,220,250};
@@ -36,7 +36,7 @@ public:
 
 };
 
-bool LevelManager::colisao(Personagem &pers,Ground plataformas)
+bool LevelManager::collided(Personagem &pers,Ground plataformas)
 {
     if(pers.x+30 > plataformas.x1 && pers.x+10 < plataformas.x2 &&
             pers.y+40 < plataformas.y1+50 && pers.y > plataformas.y1-10)
@@ -47,20 +47,8 @@ bool LevelManager::colisao(Personagem &pers,Ground plataformas)
 
         return true;
     }
-    /*
-            textprintf_ex(screen, font, 100, 120, makecol(255, 100, 255),
-                        -1, "%d       %d", pers.chao, plataformas->y1);
-            rest(100);
 
-        }else{
-
-            //pers.vel_y = 0;
-            pers.chao = 500;
-            if(pers.y != pers.chao)
-                pers.grounded = false;
-
-        }
-    */
+    return false;
 }
 
 
@@ -68,7 +56,6 @@ void LevelManager::init()
 {
     //pers.pos_mundo = mundo_altura_max-150; //POSI�AO DO PERSONAGEM NA SPRITE CONSIDERADO SIMILAR AO DA SCREEN
     altura_mapa = 0;
-    srand(time(NULL));
     for(int i = 0,x = rand()%650+x, y = rand()%500; i < 10; i++,x = rand()%650, y = rand()%500)
     {
         Ground *g = new Ground(x, rand()%800+x, y, rand()%600+y);
@@ -78,28 +65,27 @@ void LevelManager::init()
 }
 void LevelManager::update(Personagem &pers, BITMAP* &vida)
 {
-
-
     ///COLISOES----------------------------------------------///
-    for(int i=0; i<10; i++)
-    {
+    // for(int i=0; i<10; i++)
+    // {
+    //     collided(pers, plataformas[i]);
+    // }
 
-        colisao(pers, plataformas[i]);
-    }
-    if(colisao(pers, g1) == false)
+    if(!collided(pers, g1))
     {
         //pers.vel_y = 0;
         pers.chao = 900;
         if(pers.y != pers.chao)
             pers.grounded = false;
     }
-    colisao(pers, g2);
-    colisao(pers, g3);
-    colisao(pers, g5);
-    colisao(pers, g4);
-    colisao(pers, g6);
-    colisao(pers, g7);
-    colisao(pers, g8);
+
+    // collided(pers, g2);
+    // collided(pers, g3);
+    // collided(pers, g5);
+    // collided(pers, g4);
+    // collided(pers, g6);
+    // collided(pers, g7);
+    // collided(pers, g8);
 
     //escada
     if(pers.x+30 > e1.x1)
@@ -114,7 +100,7 @@ void LevelManager::update(Personagem &pers, BITMAP* &vida)
         }
     */
 }
-void LevelManager::desenhar(BITMAP*buffer, BITMAP* mundo,Personagem &pers, BITMAP* ground, BITMAP* vida)
+void LevelManager::draw(BITMAP*buffer, BITMAP* mundo,Personagem &pers, BITMAP* ground, BITMAP* vida)
 {
 
     for(int i = 0; i < 10; i++)

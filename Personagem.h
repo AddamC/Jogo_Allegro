@@ -1,7 +1,7 @@
 #pragma once
 #include <allegro.h>
 #include "Shooting.h"
-#include "global.h"
+#include "Global.h"
 
 class Personagem
 {
@@ -16,14 +16,14 @@ public:
     bool pressionado = false;
     bool morto = false;
 
-    //instanciaçao de objetos
+    //instanciaï¿½ao de objetos
     Shooting projetil;
 
     Personagem(); //construtor padrao
 
     void init();
     void update();
-    void desenhar(BITMAP*buffer, BITMAP*heroi);
+    void draw(BITMAP*buffer, BITMAP*heroi);
     void cair();
     void controls();
 };
@@ -77,7 +77,7 @@ void Personagem::update()
         morto = false;
     }
     ///---------------------------------**
-    //POSIÇOES
+    //POSIï¿½OES
     if(x < 0)
     {
         x = 0;
@@ -120,7 +120,7 @@ void Personagem::controls()
         init();
     }
     */
-    ///VERIFICAÇAO DO ATIVO PARA ACESSAR AS UTILIDADES DO PERSONAGEM
+    ///VERIFICAï¿½AO DO ATIVO PARA ACESSAR AS UTILIDADES DO PERSONAGEM
     if(ativo)
     {
         if(key[KEY_RIGHT])
@@ -194,12 +194,12 @@ void Personagem::controls()
     }
 }
 
-void Personagem::desenhar(BITMAP*buffer, BITMAP*heroi)
+void Personagem::draw(BITMAP*buffer, BITMAP*heroi)
 {
 
     ///TESTE DOS VALORES-------------------------------------------//
     textprintf_ex(buffer, font, 10, 10, makecol(255, 100, 0),
-                  -1, "posicao personagem y: %i", y);
+                  -1, "posicao personagem y: %i", (int) y);
     textprintf_ex(buffer, font, 10, 20, makecol(255, 100, 0),
                   -1, "naEscada: %i", naEscada);
     textprintf_ex(buffer, font, 10, 30, makecol(255, 100, 0),
@@ -207,7 +207,7 @@ void Personagem::desenhar(BITMAP*buffer, BITMAP*heroi)
     textprintf_ex(buffer, font, 10, 40, makecol(255, 100, 0),
                   -1, "vel_y: %f", vel_y);
     textprintf_ex(buffer, font, 10, 50, makecol(255, 100, 0),
-                  -1, "posicao personagem x: %i", x);
+                  -1, "posicao personagem x: %i", (int) x);
     textprintf_ex(buffer, font, 10, 60, makecol(255, 100, 0),
                   -1, "grounded: %i", grounded);
     textprintf_ex(buffer, font, 10, 70, makecol(255, 100, 0),
@@ -216,7 +216,7 @@ void Personagem::desenhar(BITMAP*buffer, BITMAP*heroi)
     ///FIM DOS TESTES----------------------------------------------//
 
 
-    //desenhar personagem
+    //draw personagem
     if(ativo)
     {
         rectfill(buffer, x,y-20,x+30,y, makecol(255,255,0));
